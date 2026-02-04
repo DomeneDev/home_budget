@@ -18,13 +18,14 @@ home_budget/
 ├── main.py              # Orquestador del programa y menú de usuario.
 ├── budget_logic.py      # Motor de cálculo y gestión de movimientos.
 └── README.md            # Documentación del sistema.
+```
 🛠️ Instalación y Uso
 Requisitos: Tener instalado Python 3.10 o superior.
 
+```plaintext
 Ejecución:
-
 Bash
-
+```
 python main.py
 🛡️ Roadmap de Desarrollo (Sprints)
 🟢 Sprint 1: Lógica Core (Estado Actual)
