@@ -23,18 +23,63 @@ def ejecutar_budget():
         print("| 5 - Salir                           |")
         print("+-------------------------------------+\n")
         # Almacenamos opción del usuario
-        opcion = int(input("Seleccione una opción: "))
+        while True:
+            opcion = input("Seleccione una opción: ")
+            try:
+                opcion = int(opcion)
+                break
+            except ValueError:
+                print("Error: 🛑 Debe introducir el valor númerico de la opción..")
         # Evaluamos y realizamos operación
         match opcion:
             case 1:
-                concepto = input("Intoruduzca concepto: ")
-                categoria = input("Introduzca categoria: ")
-                cantidad = float(input("Introduzca cantidad: "))
+                while True:
+                    concepto = input("Intoruduzca concepto: ")
+                    try:
+                        if not concepto.strip():
+                            raise ValueError(
+                                "🛑 No has introducido un concepto válido..."
+                            )
+                        else:
+                            break
+                    except ValueError as e:
+                        print(f"❌ ERROR: {e}")
+                while True:
+                    categoria = input("Introduzca categoria: ")
+                    try:
+                        if not categoria.strip():
+                            raise ValueError(
+                                "🛑 No has introducido un categoria válido..."
+                            )
+                        else:
+                            break
+                    except ValueError as e:
+                        print(f"❌ ERROR: {e}")
+                while True:
+                    cantidad = input("Introduzca cantidad: ")
+                    try:
+                        cantidad = float(cantidad)
+                        if cantidad > 0:
+                            break
+                        else:
+                            print("Error: 🛑 La cantidad no puede ser negativa...")
+                    except ValueError:
+                        pass
                 registrar_movimiento(
                     movimientos, concepto, categoria, cantidad)
                 print(f"✍ Movimiento {concepto} anotado.\n")
             case 2:
-                categoria = input("Introduzca categoria a buscar: ")
+                while True:
+                    categoria = input("Introduzca categoria: ")
+                    try:
+                        if not categoria.strip():
+                            raise ValueError(
+                                "🛑 No has introducido un categoria válido..."
+                            )
+                        else:
+                            break
+                    except ValueError as e:
+                        print(f"❌ ERROR: {e}")
                 lista_filtrada = filtar_por_categoria(movimientos, categoria)
                 print("------------------------------------------------------")
                 print(f"Movimientos de la categoria: {categoria.title()}")
@@ -55,8 +100,18 @@ def ejecutar_budget():
                 else:
                     print(f"💰 Balance Actual: {balance_movimientos} € 🔴\n")
             case 4:
-                id_movimiento = int(
-                    input("Introduzca el ID del movimiento a eliminar: "))
+                while True:
+                    id_movimiento = input(
+                        "Introduzca el ID del movimiento a eliminar: ")
+                    try:
+                        id_movimiento = int(id_movimiento)
+                        if id_movimiento > 0:
+                            break
+                        else:
+                            print(
+                                "Error: 🛑 La ID debe ser un valor númerico válido...")
+                    except ValueError:
+                        pass
                 if eliminar_movimiento(movimientos, id_movimiento):
                     print(" ❌ Movimiento eliminado...")
                 else:
