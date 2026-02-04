@@ -29,11 +29,11 @@ Bash
 python main.py
 🛡️ Roadmap de Desarrollo (Sprints)
 🟢 Sprint 1: Lógica Core (Estado Actual)
-[ ] Implementación de estructura de datos basada en listas de diccionarios.
+[x] Implementación de estructura de datos basada en listas de diccionarios.
 
-[ ] Desarrollo de funciones CRUD (Crear, Leer, Eliminar) de movimientos.
+[x] Desarrollo de funciones CRUD (Crear, Leer, Eliminar) de movimientos.
 
-[ ] Motor de balance neto y filtrado por categorías.
+[x] Motor de balance neto y filtrado por categorías.
 
 🟡 Sprint 2: Robustez y Validación
 [ ] Manejo de excepciones (try-except) para entradas de dinero no numéricas.
