@@ -25,9 +25,10 @@ Requisitos: Tener instalado Python 3.10 o superior.
 ```plaintext
 Ejecución:
 Bash
-```
 python main.py
+```
 🛡️ Roadmap de Desarrollo (Sprints)
+
 🟢 Sprint 1: Lógica Core (Estado Actual)
 [x] Implementación de estructura de datos basada en listas de diccionarios.
 
