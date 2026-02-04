@@ -37,9 +37,9 @@ python main.py
 [x] Motor de balance neto y filtrado por categorías.
 
 🟡 Sprint 2: Robustez y Validación
-[ ] Manejo de excepciones (try-except) para entradas de dinero no numéricas.
+[x] Manejo de excepciones (try-except) para entradas de dinero no numéricas.
 
-[ ] Validación de campos vacíos en conceptos y categorías.
+[x] Validación de campos vacíos en conceptos y categorías.
 
 🔵 Sprint 3: Refactorización Arquitectónica (Utils)
 [ ] Aplicación de la Navaja de Ockham: Simplificación del main.py.
