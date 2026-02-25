@@ -11,10 +11,12 @@ def mostrar_menu():
     print("| 🏠 Presupuesto Familiar             |")
     print("+-------------------------------------+")
     print("| 1 - Añadir movimiento               |")
-    print("| 2 - Filtar gasto por categoria      |")
-    print("| 3 - Obtener balance                 |")
-    print("| 4 - Eliminar movimiento             |")
-    print("| 5 - Salir                           |")
+    print("| 2 - Filtar gastos                   |")
+    print("| 3 - Total gastos                    |")
+    print("| 4 - Total ingresos                  |")
+    print("| 5 - Obtener balance                 |")
+    print("| 6 - Eliminar movimiento             |")
+    print("| 7 - Salir                           |")
     print("+-------------------------------------+\n")
 
 
@@ -89,7 +91,7 @@ def validacion_dato(msg_input: str, msg_error_neg: str, msg_error: str, tipo_dat
     return dato
 
 
-def mostrar_movimientos(movimientos_filtrados: list, categoria: str):
+def mostrar_movimientos(movimientos_filtrados: list, titulo: str):
     """
     Función para mostrar movimiento por categoria.
 
@@ -98,12 +100,18 @@ def mostrar_movimientos(movimientos_filtrados: list, categoria: str):
         movimientos_filtrados (list): Lista de movimientos.
     """
     print("------------------------------------------------------")
-    print(f"Movimientos de la categoria: {categoria.title()}")
+    print(f"Movimientos de la categoria: {titulo.title()}")
     print("------------------------------------------------------")
     if not movimientos_filtrados:
         print(" ❌ No hay movimientos_filtrados que mostrar..")
     for movimiento in movimientos_filtrados:
+        if movimiento['tipo'] == "Gasto":
+            tipo_notacion = "Gasto 🔴"
+        else:
+            tipo_notacion = "Ingreso 🟢"
         print(f" 👉Movimiento ID: {movimiento['id']}")
+        print(f" - Fecha: {movimiento['fecha']}")
+        print(f" - Tipo: {tipo_notacion}")
         print(f" - Concepto: {movimiento['concepto']}.")
         print(f" - Categoria: {movimiento['categoria']}.")
         print(f" - Cantidad: {movimiento['cantidad']}")
@@ -122,3 +130,68 @@ def mostrar_balance(balance: float):
         print(f"💰 Balance Actual: {balance} € 🟢\n")
     else:
         print(f"💰 Balance Actual: {balance} € 🔴\n")
+
+
+def validar_tipo_movimiento(msg_input: str, msg_error: str):
+    """
+    Función para validar tipo de notación
+    Valores posibles
+    - Gasto
+    - Ingreso
+
+    Args:
+        msg_input (str): Mensaje del input
+        msg_error (str): Mensaje de error
+    """
+    while True:
+        tipo = input(msg_input).title()
+        if tipo == "Gasto":
+            return tipo
+        elif tipo == "Ingreso":
+            return tipo
+        else:
+            print(f"❌ ERROR: {msg_error}")
+
+
+def validar_fecha(msg_input, msg_error) -> str:
+    """
+    Función para validar una fecha en formato:
+    dd-mm-aaaa
+
+    Args:
+        msg_imput (_type_): Mensaje de input
+        msg_error (_type_): Mensaje de error
+
+    Returns:
+        str: Cadena donde se almacena la fecha con formato indicado.
+    """
+    while True:
+        fecha = input(msg_input).strip()
+        # Comprobar formato básico
+        if len(fecha) != 10 or fecha[2] != "-" or fecha[5] != "-":
+            print(msg_error)
+            continue
+        dia, mes, anio = fecha.split("-")
+        # Comprobar que sean números
+        if not (dia.isdigit() and mes.isdigit() and anio.isdigit()):
+            print(msg_error)
+            continue
+        dia = int(dia)
+        mes = int(mes)
+        anio = int(anio)
+        # Comprobar mes válido
+        if mes < 1 or mes > 12:
+            print(msg_error)
+            continue
+        # Días por mes
+        dias_mes = [31, 28, 31, 30, 31, 30,
+                    31, 31, 30, 31, 30, 31]
+        # Comprobar año bisiesto
+        if (anio % 4 == 0 and anio % 100 != 0) or (anio % 400 == 0):
+            dias_mes[1] = 29  # Febrero
+        # Comprobar día válido
+        if dia < 1 or dia > dias_mes[mes - 1]:
+            print(msg_error)
+            continue
+
+        return fecha
