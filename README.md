@@ -7,7 +7,7 @@
 ## 🚀 Características Principales
 
 - **Categorización Dinámica**: Sin categorías fijas; el sistema se adapta a tu estilo de vida.
-- **Gestión de Flujo de Caja**: Registro unificado de ingresos (positivos) y gastos (negativos).
+- **Gestión de Flujo de Caja**: Registro de tipos de movimientos Ingresos y Gastos.
 - **Motor de Búsqueda**: Filtrado inteligente por categorías para detectar fugas de capital.
 - **Control de Identidad**: Sistema de IDs únicos e irrepetibles para asegurar la integridad de los registros.
 
@@ -17,6 +17,7 @@
 home_budget/
 ├── main.py              # Orquestador del programa y menú de usuario.
 ├── budget_logic.py      # Motor de cálculo y gestión de movimientos.
+├── utils.py             # Funciones de apoyo a lógica y a main
 └── README.md            # Documentación del sistema.
 ```
 🛠️ Instalación y Uso
@@ -42,9 +43,9 @@ python main.py
 [x] Validación de campos vacíos en conceptos y categorías.
 
 🔵 Sprint 3: Refactorización Arquitectónica (Utils)
-[ ] Aplicación de la Navaja de Ockham: Simplificación del main.py.
+[x] Aplicación de la Navaja de Ockham: Simplificación del main.py.
 
-[ ] Creación de utils.py para desacoplar la lógica de formateo de moneda y menús.
+[x] Creación de utils.py para desacoplar la lógica de formateo de moneda y menús.
 
 🟠 Sprint 4: Persistencia de Datos
 [ ] Implementación de guardado automático en formato CSV para histórico anual.
