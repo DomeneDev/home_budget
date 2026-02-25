@@ -3,13 +3,17 @@ Lógica funcional del proyecto de home budget (Presupuesto familiar)
 """
 
 
-def registrar_movimiento(lista_movimientos: list, concepto: str, categoria: str, cantidad: float):
+def registrar_movimiento(
+        lista_movimientos: list, fecha: str, tipo: str,
+        concepto: str, categoria: str, cantidad: float):
     """
     Función para generar un movimiento, agregara un diccionario con la estructura:
     - id(int): Identificador único incremental
+    - fecha(str): Fecha de movimiento
+    - tipo(str): Tipo de movimiento(Ingreso, Gasto)
     - concepto(str): Descripción del movimiento
     - categoria(str):Etiqueta de clasificación("Sueldo", "Ocio", "Vivienda"..).
-    - cantidad(float): Valor monetario (+ para entrada, - para salida).
+    - cantidad(float): Valor monetario.
     A la lista de movimientos.
 
     Args:
@@ -29,6 +33,8 @@ def registrar_movimiento(lista_movimientos: list, concepto: str, categoria: str,
     # Generamos el diccionario movimiento
     movimiento = {
         "id": id_mov,
+        "fecha": fecha,
+        "tipo": tipo,
         "concepto": concepto,
         "categoria": categoria.lower(),
         "cantidad": cantidad
@@ -37,22 +43,53 @@ def registrar_movimiento(lista_movimientos: list, concepto: str, categoria: str,
     lista_movimientos.append(movimiento)
 
 
-def obtener_balance(lista_movimiento: list) -> float:
+def obtener_ingresos_gastos(lista_movimientos: list) -> dict:
     """
-    Función para obtener el balance desde la lista de movimentos, contabilizará:
-    - positivos (entradas)
-    - negativos (salidas)
-    Y devolverá la diferencia entre ellos.
+    Función para obtener la suma de los gastos según el tipo
 
     Args:
-        lista_movimiento (list): Lista donde se almacenan los movimientos.
+        lista_movimientos (list): Lista de movimientos
+
+    Returns:
+        dict: Diccionario con la estructura:
+        {
+            "ingresos":ingresos,
+            "gastos":gastos
+        }
+    """
+    gasto = 0
+    ingreso = 0
+    for movimiento in lista_movimientos:
+        if movimiento['tipo'] == "Ingreso":
+            ingreso += movimiento['cantidad']
+        else:
+            gasto += movimiento['cantidad']
+    ingresos_gastos = {
+        "ingresos": ingreso,
+        "gastos": gasto
+    }
+    return ingresos_gastos
+
+
+def obtener_balance(ingresos_gastos: dict) -> float:
+    """
+    Función para obtener el balance desde la lista de movimentos, se calculará
+    con la diferencia de valores del diccionario ingresos_gastos, obtenido en la
+    función obtner_ingresos_gastos()
+
+    Args:
+        ingresos_gastos (dict): Diccionario donde se almacenan la suma de los
+        ingresos y los gastos.
+        Estructura:
+        {
+            "ingresos":ingresos,
+            "gastos":gastos
+        }
 
     Returns:
         float: Diferencia de las entradas menos las salidas.
     """
-    # Sumamos todos los valores de la clave cantidad
-    balance = sum(movimiento['cantidad'] for movimiento in lista_movimiento)
-    # Devolvemos el balance con dos decimales.
+    balance = ingresos_gastos['ingresos'] - ingresos_gastos['gastos']
     return round(balance, 2)
 
 
