@@ -15,10 +15,13 @@
 
 ```plaintext
 home_budget/
-├── main.py              # Orquestador del programa y menú de usuario.
-├── budget_logic.py      # Motor de cálculo y gestión de movimientos.
-├── utils.py             # Funciones de apoyo a lógica y a main
-└── README.md            # Documentación del sistema.
+|    ├── data                    # Carpeta de datos para almacenar ficheros json
+|          ├──home_budget.json   # Fichero json con pruebas de funcionamiento
+├── main.py                      # Orquestador del programa y menú de usuario.
+├── budget_logic.py              # Motor de cálculo y gestión de movimientos.
+├── utils.py                     # Funciones de apoyo a lógica y a main
+├── json_manager.py              # Funciones para controlar fichero json
+└── README.md                    # Documentación del sistema.
 ```
 🛠️ Instalación y Uso
 Requisitos: Tener instalado Python 3.10 o superior.
@@ -48,9 +51,9 @@ python main.py
 [x] Creación de utils.py para desacoplar la lógica de formateo de moneda y menús.
 
 🟠 Sprint 4: Persistencia de Datos
-[ ] Implementación de guardado automático en formato CSV para histórico anual.
+[x] Implementación de guardado automático en formato json para histórico anual.
 
-[ ] Carga de datos al iniciar la aplicación.
+[x] Carga de datos al iniciar la aplicación.
 
 🔴 Sprint 5: Paradigma de Objetos (POO)
 [ ] Reingeniería total mediante clases: Movement, Account y Report.
