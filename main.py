@@ -3,6 +3,13 @@ Fichero principal del programa
 """
 from budget_logic import registrar_movimiento, obtener_ingresos_gastos, obtener_balance, filtar_por_categoria, eliminar_movimiento
 from utils import mostrar_menu, validar_opcion, leer_cadenas, validacion_dato, mostrar_movimientos, mostrar_balance, validar_tipo_movimiento, validar_fecha
+from json_manager import guardar_presupuesto, cargar_movimientos
+
+# ---- Nombre del fichero json ----
+NOMBRE_FICHERO = "home_budget.json"
+
+# ---- Ruta para guardar fichero ----
+RUTA = f"home_budget/data/{NOMBRE_FICHERO}"
 
 # ---- CONSTANTES PARA INPUTS ----
 INPUT_OPC = "Seleccione una opción: "
@@ -23,13 +30,19 @@ ERROR_DATO_NEG = "🛑 El ID no puede ser negativo..."
 ERROR_TIPO_MOV = "🛑 El movimiento no es correcto..."
 ERROR_FECHA = "🛑 La fecha introducida no esta en el formato correcto o no es correcta..."
 
+# ---- MENSAJES INFORMATIVOS ----
+MSG_FICHERO_CARGADO = ""
+MSG_FICHERO_NUEVO = ""
+MSG_FICHERO_CORRUPTO = ""
+
 
 def ejecutar_budget():
     """
     Función principal del programa
     """
     # Lista para almacenar movimientos.
-    movimientos = []
+    movimientos = cargar_movimientos(
+        RUTA, MSG_FICHERO_CARGADO, MSG_FICHERO_NUEVO, MSG_FICHERO_CORRUPTO)
     # Bucle principal
     while True:
         # Mostramos menú
@@ -47,6 +60,7 @@ def ejecutar_budget():
                     INPUT_CANT, ERROR_CANT_NEG, ERROR_DATO, float)
                 registrar_movimiento(movimientos, fecha,
                                      tipo, concepto, categoria, cantidad)
+                guardar_presupuesto(movimientos, RUTA)
                 print(f"✍ Movimiento {concepto} anotado.\n")
             case 2:
                 categoria = leer_cadenas(INPUT_CAT, ERROR_CAT)
@@ -72,6 +86,7 @@ def ejecutar_budget():
                 else:
                     print(" 📛 Movimiento no encontrado....")
             case 7:
+                guardar_presupuesto(movimientos, RUTA)
                 print("🖐 Saliendo del programa....")
                 break
             case _:
