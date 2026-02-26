@@ -11,7 +11,7 @@ def mostrar_menu():
     print("| 🏠 Presupuesto Familiar             |")
     print("+-------------------------------------+")
     print("| 1 - Añadir movimiento               |")
-    print("| 2 - Filtar gastos                   |")
+    print("| 2 - Filtar movimientos              |")
     print("| 3 - Total gastos                    |")
     print("| 4 - Total ingresos                  |")
     print("| 5 - Obtener balance                 |")
@@ -67,7 +67,7 @@ def leer_cadenas(msg_imput: str, msg_error: str) -> str:
 
 def validacion_dato(msg_input: str, msg_error_neg: str, msg_error: str, tipo_dato: type):
     """
-    Funció para validar datos
+    Función para validar datos
 
     Args:
         msg_input (str): Mensaje de input
@@ -193,5 +193,4 @@ def validar_fecha(msg_input, msg_error) -> str:
         if dia < 1 or dia > dias_mes[mes - 1]:
             print(msg_error)
             continue
-
         return fecha
