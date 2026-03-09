@@ -55,8 +55,4 @@ python main.py
 
 [x] Carga de datos al iniciar la aplicación.
 
-🔴 Sprint 5: Paradigma de Objetos (POO)
-[ ] Reingeniería total mediante clases: Movement, Account y Report.
-
-[ ] Encapsulamiento de la lógica financiera en métodos de clase.
 ```
